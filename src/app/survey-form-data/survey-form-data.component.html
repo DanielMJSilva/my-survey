@@ -1,0 +1,49 @@
+
+<h1>Survey</h1>
+ 
+<form [formGroup]="surveyForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+        <label>Title</label>
+        <input formControlName="title" type="text" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <textarea row="2" formControlName="description" type="text" class="form-control"></textarea>
+    </div>
+
+  <div formArrayName="questions">
+    <div *ngFor="let question of questions().controls; let questIndex=index">
+      <div
+        [formGroupName]="questIndex"
+        style="border: 1px solid blue; padding: 10px; width: 600px; margin: 5px;"
+      >
+        {{questIndex}} Question :
+        <input type="text" formControlName="question" />
+     
+        <button (click)="removeQuestion(questIndex)">Remove</button>
+ 
+        <div formArrayName="options">
+          <div
+            *ngFor="let option of questionOptions(questIndex).controls; let optionIndex=index"
+          >
+            <div [formGroupName]="optionIndex">
+              {{optionIndex}} Option :
+              <input type="text" formControlName="option" />
+             
+ 
+              <button (click)="removeQuestionOption(questIndex,optionIndex)">
+                Remove
+              </button>
+            </div>
+          </div>
+        </div>
+        <button type="button" (click)="addQuestionOption(questIndex)">
+          Add Option
+        </button>
+      </div>
+    </div>
+    <button type="button" (click)="addQuestion()">Add Question</button>
+  </div>
+</form>
+{{ surveyForm.value | json}}
