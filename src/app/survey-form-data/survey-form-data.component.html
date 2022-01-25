@@ -1,4 +1,4 @@
-
+<div class="container-fluid">
 <h1>Survey</h1>
  
 <form [formGroup]="surveyForm" (ngSubmit)="onSubmit()">
@@ -21,7 +21,7 @@
         {{questIndex}} Question :
         <input type="text" formControlName="question" />
      
-        <button (click)="removeQuestion(questIndex)">Remove</button>
+        <button class="btn btn-danger text-dark" (click)="removeQuestion(questIndex)">Remove</button>
  
         <div formArrayName="options">
           <div
@@ -32,18 +32,19 @@
               <input type="text" formControlName="option" />
              
  
-              <button (click)="removeQuestionOption(questIndex,optionIndex)">
+              <button class="btn btn-dark" (click)="removeQuestionOption(questIndex,optionIndex)">
                 Remove
               </button>
             </div>
           </div>
         </div>
-        <button type="button" (click)="addQuestionOption(questIndex)">
+        <button class="btn btn-success" type="button" (click)="addQuestionOption(questIndex)">
           Add Option
         </button>
       </div>
     </div>
-    <button type="button" (click)="addQuestion()">Add Question</button>
+    <button class="btn btn-primary" type="button" (click)="addQuestion()">Add Question</button>
   </div>
 </form>
+</div>
 {{ surveyForm.value | json}}
